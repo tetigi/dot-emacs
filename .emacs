@@ -89,3 +89,9 @@
 ;; TMUX style windows
 (eyebrowse-mode t)
 (global-set-key (kbd "C-q") 'window-number-switch)
+
+;; Parens
+(show-paren-mode 1)
+
+;; Line numbers
+(global-display-line-numbers-mode)
