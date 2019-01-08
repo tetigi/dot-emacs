@@ -4,18 +4,23 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "7f89ec3c988c398b88f7304a75ed225eaac64efa8df3638c815acc563dfd3b55" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" "ec5f697561eaf87b1d3b087dd28e61a2fc9860e4c862ea8e6b0b77bd4967d0ba" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+   '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "7f89ec3c988c398b88f7304a75ed225eaac64efa8df3638c815acc563dfd3b55" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" "ec5f697561eaf87b1d3b087dd28e61a2fc9860e4c862ea8e6b0b77bd4967d0ba" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default))
  '(package-selected-packages
-   (quote
-    (yaml-mode cargo rust-mode eyebrowse window-number company gruvbox-theme color-theme-sanityinc-tomorrow spacemacs-theme badger-theme monokai-theme zenburn-theme aggressive-indent rainbow-delimiters evil-paredit projectile paredit clojure-mode-extra-font-locking cider solarized-theme evil ##))))
+   '(yaml-mode cargo rust-mode eyebrowse window-number company gruvbox-theme color-theme-sanityinc-tomorrow spacemacs-theme badger-theme monokai-theme zenburn-theme aggressive-indent rainbow-delimiters evil-paredit projectile paredit clojure-mode-extra-font-locking cider solarized-theme evil ##))
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
 
-(custom-set-faces
+(custom-set-faces)
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
@@ -44,11 +49,12 @@
 ;; MELPA setup
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(package-initialize)
 
 ;; EVIL
+(setq evil-want-C-u-scroll t)
 (require 'evil)
 (evil-mode 1)
+(define-key evil-normal-state-map "q" nil)
 
 ;; Menu bar cleanup
 (menu-bar-mode -1)
@@ -130,3 +136,19 @@ Assumes that the frame is only split into two."
 (add-hook 'yaml-mode-hook
           (lambda ()
             (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
+;; WINNER!
+(winner-mode)
+
+;; ENV
+(setenv "GOOGLE_APPLICATION_CREDENTIALS" "/home/tetigi/opt/google/gcloud-service-key.json")
+
+;; AUTO-COMPLETE
+(add-hook 'cider-repl-mode-hook #'company-mode)
+(add-hook 'cider-mode-hook #'company-mode)
+(add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
+(add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion)
+
+;; FONT
+(set-face-attribute 'default nil :font "Ubuntu Mono-12")
+(set-frame-font "Ubuntu Mono-12" nil t)
